@@ -13,7 +13,7 @@ exports[`renders the snapshot 1`] = `
       src="logo.svg"
     />
     <h1
-      className="App-title"
+      className="App-Title"
     >
       Welcome to React
     </h1>

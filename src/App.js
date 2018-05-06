@@ -20,7 +20,7 @@ class App extends Component<Props, State> {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="app-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-Title">Welcome to React</h1>
         </header>
       </div>
     );

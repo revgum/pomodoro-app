@@ -19,7 +19,7 @@ it("renders without crashing", () => {
 // Jest matcher test
 it("renders without crashing", () => {
   const wrapper = shallow(<App />);
-  const welcome = <h1 className="App-title">Welcome to React</h1>;
+  const welcome = <h1 className="App-Title">Welcome to React</h1>;
   expect(wrapper.contains(welcome)).toEqual(true);
   // or use jest-enzyme matchers
   expect(wrapper).toContainReact(welcome);
