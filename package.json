@@ -27,6 +27,7 @@
     "eject": "react-scripts eject",
     "flow": "flow"
   },
+  "proxy": "http://localhost:3000",
   "jest": {
     "collectCoverageFrom" : [
       "src/**/*.{js,jsx}",
