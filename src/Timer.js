@@ -10,7 +10,7 @@ type Props = {
 
 type State = {
   secondsRemaining: number,
-  timer?: IntervalID
+  timer?: IntervalID | null
 };
 
 export default class Timer extends React.Component<Props, State> {
@@ -20,7 +20,8 @@ export default class Timer extends React.Component<Props, State> {
   };
 
   state = {
-    secondsRemaining: 25 * 60
+    secondsRemaining: 25 * 60,
+    timer: null
   };
 
   constructor(props: Props) {
@@ -44,9 +45,9 @@ export default class Timer extends React.Component<Props, State> {
         secondsRemaining: prevState.secondsRemaining - 1
       }));
     } else {
-      clearInterval(this.state.timer);
+      if (this.state.timer !== null) clearInterval(this.state.timer);
       this.setState({
-        timer: 0,
+        timer: null,
         secondsRemaining: 0
       });
     }

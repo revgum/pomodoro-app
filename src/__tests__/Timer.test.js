@@ -58,6 +58,6 @@ describe("#tick", () => {
     instance.tick();
     expect(tickSpy).toHaveBeenCalled();
     expect(instance.state.secondsRemaining).toEqual(0);
-    expect(instance.state.timer).toEqual(0);
+    expect(instance.state.timer).toEqual(null);
   });
 });
