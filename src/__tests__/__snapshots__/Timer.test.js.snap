@@ -2,12 +2,8 @@
 
 exports[`captures a snapshot 1`] = `
 <div
-  className="app"
+  className="timer"
 >
-  <div
-    className="timer"
-  >
-    25:00
-  </div>
+  25:00
 </div>
 `;

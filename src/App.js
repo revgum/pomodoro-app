@@ -1,30 +1,19 @@
 // @flow
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Timer from "./Timer";
 
-type Props = {
-  foo: string
-};
-type State = {
-  blah: string
-};
+type Props = {};
+type State = {};
 
-class App extends Component<Props, State> {
-  static defaultProps = {
-    foo: 123
-  };
+export default class App extends Component<Props, State> {
+  static defaultProps = {};
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="app-logo" alt="logo" />
-          <h1 className="App-Title">Welcome to React</h1>
-        </header>
+      <div className="app">
+        <Timer />
       </div>
     );
   }
 }
-
-export default App;

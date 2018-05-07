@@ -1,31 +1,22 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import App from "../App";
+import Timer from "../Timer";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 
-// Basic test full rendering
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
-
 // Shallow rendering test
-it("renders without crashing", () => {
+it("passes a smoke test", () => {
   shallow(<App />);
 });
 
 // Jest matcher test
-it("renders without crashing", () => {
+it("renders a timer", () => {
   const wrapper = shallow(<App />);
-  const welcome = <h1 className="App-Title">Welcome to React</h1>;
-  expect(wrapper.contains(welcome)).toEqual(true);
-  // or use jest-enzyme matchers
-  expect(wrapper).toContainReact(welcome);
+  const timer = <Timer minutes={25} seconds={0} />;
+  expect(wrapper).toContainReact(timer);
 });
 
-it("renders the snapshot", () => {
+it("captures a snapshot", () => {
   const tree = renderer.create(<App />).toJSON();
   expect(tree).toMatchSnapshot();
 });
