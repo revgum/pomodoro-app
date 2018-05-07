@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`captures a snapshot 1`] = `
+<div>
+  <ul>
+    <li
+      className="start started"
+      onClick={[Function]}
+    >
+      Start/Stop
+    </li>
+    <li
+      className="pause enabled"
+      onClick={[Function]}
+    >
+      Pause
+    </li>
+    <li
+      className="reset"
+      onClick={[Function]}
+    >
+      Reset
+    </li>
+  </ul>
+</div>
+`;

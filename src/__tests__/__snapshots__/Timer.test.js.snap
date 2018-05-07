@@ -18,12 +18,13 @@ exports[`captures a snapshot 1`] = `
         Start/Stop
       </li>
       <li
-        className="pause"
+        className="pause enabled"
         onClick={[Function]}
       >
         Pause
       </li>
       <li
+        className="reset"
         onClick={[Function]}
       >
         Reset

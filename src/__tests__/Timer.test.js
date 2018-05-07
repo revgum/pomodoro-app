@@ -41,24 +41,139 @@ it("renders an hour timer", () => {
 });
 
 describe("#tick", () => {
-  it("decrements the timer", () => {
+  it("decrements the timer and increments elapsed time", () => {
     const wrapper = shallow(<Timer minutes={10} seconds={0} />);
     const instance = wrapper.instance();
     const tickSpy = jest.spyOn(instance, "tick");
     instance.tick();
     expect(tickSpy).toHaveBeenCalled();
-    expect(instance.state.secondsRemaining).toEqual(599);
+    expect(wrapper).toHaveState({
+      isPaused: false,
+      isStarted: true,
+      secondsElapsed: 1,
+      secondsRemaining: 599
+    });
   });
-  it("stops the timer when it reaches 0", () => {
+  it("stops and resets the timer when it reaches 0", () => {
     const wrapper = shallow(<Timer minutes={0} seconds={1} />);
     const instance = wrapper.instance();
     const tickSpy = jest.spyOn(instance, "tick");
+
+    // Tick the timer for the final second
     instance.tick();
     expect(tickSpy).toHaveBeenCalled();
-    expect(instance.state.secondsRemaining).toEqual(0);
+    expect(wrapper).toHaveState({
+      isPaused: false,
+      isStarted: true,
+      secondsElapsed: 1,
+      secondsRemaining: 0
+    });
+
+    // Tick the timer after time has expired
     instance.tick();
     expect(tickSpy).toHaveBeenCalled();
-    expect(instance.state.secondsRemaining).toEqual(0);
-    expect(instance.state.timer).toEqual(null);
+    expect(wrapper).toHaveState({
+      isPaused: false,
+      isStarted: false,
+      secondsElapsed: 0,
+      secondsRemaining: 0,
+      timer: null
+    });
+  });
+});
+
+describe("#clickPause", () => {
+  const wrapper = shallow(<Timer minutes={0} seconds={1} />);
+  const instance = wrapper.instance();
+  const tickSpy = jest.spyOn(instance, "tick");
+  const pauseSpy = jest.spyOn(instance, "clickPause");
+
+  it("pauses the timer and increments the elapsed time", () => {
+    expect(wrapper).toHaveState({
+      isPaused: false
+    });
+
+    instance.clickPause();
+    expect(pauseSpy).toHaveBeenCalled();
+    instance.tick();
+    expect(wrapper).toHaveState({
+      isPaused: true,
+      secondsElapsed: 1
+    });
+  });
+});
+
+describe("#clickReset", () => {
+  const wrapper = shallow(<Timer minutes={0} seconds={1} />);
+  const instance = wrapper.instance();
+  const tickSpy = jest.spyOn(instance, "tick");
+  const resetSpy = jest.spyOn(instance, "clickReset");
+
+  it("resets the timer", () => {
+    expect(wrapper).toHaveState({
+      isPaused: false,
+      isStarted: true,
+      secondsElapsed: 0,
+      secondsRemaining: 1
+    });
+
+    instance.clickReset();
+    expect(resetSpy).toHaveBeenCalled();
+    instance.tick();
+    expect(wrapper).toHaveState({
+      isPaused: false,
+      isStarted: false,
+      timer: null,
+      secondsElapsed: 0,
+      secondsRemaining: 1
+    });
+  });
+});
+
+describe("#clickStartStop", () => {
+  const wrapper = shallow(<Timer minutes={0} seconds={1} />);
+  const instance = wrapper.instance();
+  const tickSpy = jest.spyOn(instance, "tick");
+  const startStopSpy = jest.spyOn(instance, "clickStartStop");
+  const resetSpy = jest.spyOn(instance, "clickReset");
+
+  it("stops and resets a timer that is running", () => {
+    expect(wrapper).toHaveState({
+      isPaused: false,
+      isStarted: true,
+      secondsElapsed: 0,
+      secondsRemaining: 1
+    });
+
+    instance.clickStartStop();
+    expect(startStopSpy).toHaveBeenCalled();
+    expect(resetSpy).toHaveBeenCalled();
+    expect(wrapper).toHaveState({
+      isPaused: false,
+      isStarted: false,
+      timer: null,
+      secondsElapsed: 0,
+      secondsRemaining: 1
+    });
+  });
+
+  it("starts a timer that was reset", () => {
+    instance.clickReset();
+    expect(wrapper).toHaveState({
+      isPaused: false,
+      isStarted: false,
+      timer: null,
+      secondsElapsed: 0,
+      secondsRemaining: 1
+    });
+
+    instance.clickStartStop();
+    expect(startStopSpy).toHaveBeenCalled();
+    expect(wrapper).toHaveState({
+      isPaused: false,
+      isStarted: true,
+      secondsElapsed: 0,
+      secondsRemaining: 1
+    });
   });
 });

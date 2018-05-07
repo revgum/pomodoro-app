@@ -27,7 +27,9 @@ export default class Controls extends React.Component<Props> {
             Pause
           </li>
           {this.props.isStarted && (
-            <li onClick={this.props.clickReset}>Reset</li>
+            <li onClick={this.props.clickReset} className={`reset`}>
+              Reset
+            </li>
           )}
         </ul>
       </div>
@@ -36,14 +38,14 @@ export default class Controls extends React.Component<Props> {
 
   startClasses = () => {
     let classes = ["start"];
-    if (this.props.isStarted) classes.push("started");
+    classes.push(this.props.isStarted ? "started" : "stopped");
     return classes.join(" ");
   };
 
   pauseClasses = () => {
     let classes = ["pause"];
     if (this.props.isPaused) classes.push("paused");
-    if (!this.props.isStarted) classes.push("inactive");
+    classes.push(this.props.isStarted ? "enabled" : "disabled");
     return classes.join(" ");
   };
 }
