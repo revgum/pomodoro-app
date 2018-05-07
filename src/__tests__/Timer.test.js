@@ -1,5 +1,6 @@
 import React from "react";
 import Timer from "../Timer";
+import Controls from "../Controls";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 
@@ -22,21 +23,21 @@ it("sets a timer interval for counting down the timer", () => {
 
 it("defaults to a 25 minute timer", () => {
   const wrapper = shallow(<Timer />);
-  expect(wrapper).toContainReact(<div className="timer">25:00</div>);
+  expect(wrapper).toContainReact(<div className="remaining">25:00</div>);
 });
 
 it("renders a specified timer", () => {
   const wrapper = shallow(<Timer minutes={10} seconds={0} />);
-  expect(wrapper).toContainReact(<div className="timer">10:00</div>);
+  expect(wrapper).toContainReact(<div className="remaining">10:00</div>);
 
   // advance the timer by a tick
   wrapper.setState({ secondsRemaining: 599 });
-  expect(wrapper).toContainReact(<div className="timer">09:59</div>);
+  expect(wrapper).toContainReact(<div className="remaining">09:59</div>);
 });
 
 it("renders an hour timer", () => {
   const wrapper = shallow(<Timer minutes={60} seconds={0} />);
-  expect(wrapper).toContainReact(<div className="timer">1:00:00</div>);
+  expect(wrapper).toContainReact(<div className="remaining">1:00:00</div>);
 });
 
 describe("#tick", () => {

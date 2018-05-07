@@ -7,7 +7,32 @@ exports[`captures a snapshot 1`] = `
   <div
     className="timer"
   >
-    25:00
+    <div
+      className="remaining"
+    >
+      25:00
+    </div>
+    <div>
+      <ul>
+        <li
+          className="start started"
+          onClick={[Function]}
+        >
+          Start/Stop
+        </li>
+        <li
+          className="pause"
+          onClick={[Function]}
+        >
+          Pause
+        </li>
+        <li
+          onClick={[Function]}
+        >
+          Reset
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 `;
