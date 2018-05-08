@@ -7,9 +7,9 @@ import type { PauseState, TimerState } from "./types";
 import * as Utils from "./utils";
 
 type Props = {
+  completeSession: Function,
   minutes: number,
-  seconds: number,
-  completeSession: Function
+  seconds: number
 };
 
 export default class Timer extends React.Component<Props, TimerState> {
@@ -78,18 +78,24 @@ export default class Timer extends React.Component<Props, TimerState> {
 
   clickReset = () => {
     if (this.state.timer !== null) clearInterval(this.state.timer);
-    this.props.completeSession(this.state);
     this.setState({
       isPaused: false,
       isStarted: false,
       timer: null,
+      pauses: [],
+      pausedElapsed: 0,
       secondsElapsed: 0,
       secondsRemaining: this.props.minutes * 60 + this.props.seconds
     });
   };
 
+  /*
+   * Stop (Finish) the pomodoro if it is currently running, otherwise
+   * start the fresh pomodoro.
+   */
   clickStartStop = () => {
     if (this.state.isStarted) {
+      this.props.completeSession(this.state);
       this.clickReset();
     } else {
       let timer_id = setInterval(this.tick, 1000);
@@ -115,10 +121,14 @@ export default class Timer extends React.Component<Props, TimerState> {
       });
   };
 
+  /*
+   * With each tick of the timer, adjust the appropriate counters or if the
+   * time has ran out then finish the pomodoro.
+   */
   tick = () => {
     let remaining = this.state.secondsRemaining;
     if (remaining <= 0) {
-      this.clickReset();
+      this.clickStartStop();
     } else if (this.state.isStarted && !this.state.isPaused) {
       this.setState(prevState => ({
         secondsElapsed: prevState.secondsElapsed + 1,
