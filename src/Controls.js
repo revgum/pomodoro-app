@@ -21,9 +21,12 @@ export default class Controls extends React.Component<Props> {
             onClick={this.props.clickStartStop}
             className={this.startClasses()}
           >
-            Start/Stop
+            {this.props.isStarted ? "Stop" : "Start"}
           </li>
-          <li onClick={this.props.clickPause} className={this.pauseClasses()}>
+          <li
+            onClick={this.props.isStarted ? this.props.clickPause : null}
+            className={this.pauseClasses()}
+          >
             Pause
           </li>
           {this.props.isStarted && (

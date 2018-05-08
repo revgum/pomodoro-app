@@ -4,30 +4,38 @@ import Controls from "../Controls";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 
+const mockCompleteSession = jest.fn();
+const timerProps = {
+  minutes: 25,
+  seconds: 0,
+  completeSession: mockCompleteSession
+};
+
 // Shallow rendering test
 it("passes a smoke test", () => {
-  shallow(<Timer />);
+  shallow(<Timer {...timerProps} />);
 });
 
 it("captures a snapshot", () => {
-  const tree = renderer.create(<Timer />).toJSON();
+  const tree = renderer.create(<Timer {...timerProps} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 it("sets a timer interval for counting down the timer", () => {
   jest.useFakeTimers();
-  const wrapper = shallow(<Timer />);
+  const wrapper = shallow(<Timer {...timerProps} />);
   expect(setInterval).toHaveBeenCalledTimes(1);
   expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 1000);
 });
 
 it("defaults to a 25 minute timer", () => {
-  const wrapper = shallow(<Timer />);
+  const wrapper = shallow(<Timer {...timerProps} />);
   expect(wrapper).toContainReact(<div className="remaining">25:00</div>);
 });
 
 it("renders a specified timer", () => {
-  const wrapper = shallow(<Timer minutes={10} seconds={0} />);
+  const props = Object.assign({}, timerProps, { minutes: 10 });
+  const wrapper = shallow(<Timer {...props} />);
   expect(wrapper).toContainReact(<div className="remaining">10:00</div>);
 
   // advance the timer by a tick
@@ -36,13 +44,15 @@ it("renders a specified timer", () => {
 });
 
 it("renders an hour timer", () => {
-  const wrapper = shallow(<Timer minutes={60} seconds={0} />);
+  const props = Object.assign({}, timerProps, { minutes: 60 });
+  const wrapper = shallow(<Timer {...props} />);
   expect(wrapper).toContainReact(<div className="remaining">1:00:00</div>);
 });
 
 describe("#tick", () => {
   it("decrements the timer and increments elapsed time", () => {
-    const wrapper = shallow(<Timer minutes={10} seconds={0} />);
+    const props = Object.assign({}, timerProps, { minutes: 10 });
+    const wrapper = shallow(<Timer {...props} />);
     const instance = wrapper.instance();
     const tickSpy = jest.spyOn(instance, "tick");
     instance.tick();
@@ -55,9 +65,12 @@ describe("#tick", () => {
     });
   });
   it("stops and resets the timer when it reaches 0", () => {
-    const wrapper = shallow(<Timer minutes={0} seconds={1} />);
+    const props = Object.assign({}, timerProps, { minutes: 0, seconds: 1 });
+    const wrapper = shallow(<Timer {...props} />);
     const instance = wrapper.instance();
     const tickSpy = jest.spyOn(instance, "tick");
+    const resetSpy = jest.spyOn(instance, "clickReset");
+    const completeSessionSpy = jest.spyOn(instance.props, "completeSession");
 
     // Tick the timer for the final second
     instance.tick();
@@ -72,18 +85,21 @@ describe("#tick", () => {
     // Tick the timer after time has expired
     instance.tick();
     expect(tickSpy).toHaveBeenCalled();
+    expect(resetSpy).toHaveBeenCalled();
+    expect(completeSessionSpy).toHaveBeenCalled();
     expect(wrapper).toHaveState({
       isPaused: false,
       isStarted: false,
       secondsElapsed: 0,
-      secondsRemaining: 0,
+      secondsRemaining: 1,
       timer: null
     });
   });
 });
 
 describe("#clickPause", () => {
-  const wrapper = shallow(<Timer minutes={0} seconds={1} />);
+  const props = Object.assign({}, timerProps, { minutes: 0, seconds: 1 });
+  const wrapper = shallow(<Timer {...props} />);
   const instance = wrapper.instance();
   const tickSpy = jest.spyOn(instance, "tick");
   const pauseSpy = jest.spyOn(instance, "clickPause");
@@ -104,10 +120,12 @@ describe("#clickPause", () => {
 });
 
 describe("#clickReset", () => {
-  const wrapper = shallow(<Timer minutes={0} seconds={1} />);
+  const props = Object.assign({}, timerProps, { minutes: 0, seconds: 1 });
+  const wrapper = shallow(<Timer {...props} />);
   const instance = wrapper.instance();
   const tickSpy = jest.spyOn(instance, "tick");
   const resetSpy = jest.spyOn(instance, "clickReset");
+  const completeSessionSpy = jest.spyOn(instance.props, "completeSession");
 
   it("resets the timer", () => {
     expect(wrapper).toHaveState({
@@ -119,6 +137,7 @@ describe("#clickReset", () => {
 
     instance.clickReset();
     expect(resetSpy).toHaveBeenCalled();
+    expect(completeSessionSpy).toHaveBeenCalled();
     instance.tick();
     expect(wrapper).toHaveState({
       isPaused: false,
@@ -131,11 +150,13 @@ describe("#clickReset", () => {
 });
 
 describe("#clickStartStop", () => {
-  const wrapper = shallow(<Timer minutes={0} seconds={1} />);
+  const props = Object.assign({}, timerProps, { minutes: 0, seconds: 1 });
+  const wrapper = shallow(<Timer {...props} />);
   const instance = wrapper.instance();
   const tickSpy = jest.spyOn(instance, "tick");
   const startStopSpy = jest.spyOn(instance, "clickStartStop");
   const resetSpy = jest.spyOn(instance, "clickReset");
+  const completeSessionSpy = jest.spyOn(instance.props, "completeSession");
 
   it("stops and resets a timer that is running", () => {
     expect(wrapper).toHaveState({
@@ -148,6 +169,7 @@ describe("#clickStartStop", () => {
     instance.clickStartStop();
     expect(startStopSpy).toHaveBeenCalled();
     expect(resetSpy).toHaveBeenCalled();
+    expect(completeSessionSpy).toHaveBeenCalled();
     expect(wrapper).toHaveState({
       isPaused: false,
       isStarted: false,

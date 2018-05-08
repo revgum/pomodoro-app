@@ -30,7 +30,13 @@
   },
   "proxy": "http://localhost:3000",
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx}", "!<rootDir>/node_modules/"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!<rootDir>/node_modules/",
+      "!src/index.js",
+      "!src/api.js",
+      "!src/registerServiceWorker.js"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 90,

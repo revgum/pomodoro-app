@@ -3,21 +3,15 @@
 import * as React from "react";
 import "./Timer.css";
 import Controls from "./Controls";
+import type { TimerState } from "./types";
 
 type Props = {
   minutes: number,
-  seconds: number
+  seconds: number,
+  completeSession: Function
 };
 
-type State = {
-  isPaused: boolean,
-  isStarted: boolean,
-  secondsElapsed: number,
-  secondsRemaining: number,
-  timer?: IntervalID | null
-};
-
-export default class Timer extends React.Component<Props, State> {
+export default class Timer extends React.Component<Props, TimerState> {
   static defaultProps = {
     minutes: 25,
     seconds: 0
@@ -26,6 +20,8 @@ export default class Timer extends React.Component<Props, State> {
   state = {
     isPaused: false,
     isStarted: true,
+    minutes: 25,
+    seconds: 0,
     secondsElapsed: 0,
     secondsRemaining: 25 * 60,
     timer: null
@@ -34,6 +30,8 @@ export default class Timer extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = Object.assign(this.state, {
+      minutes: props.minutes,
+      seconds: props.seconds,
       secondsRemaining: props.minutes * 60 + props.seconds
     });
   }
@@ -71,6 +69,7 @@ export default class Timer extends React.Component<Props, State> {
 
   clickReset = () => {
     if (this.state.timer !== null) clearInterval(this.state.timer);
+    this.props.completeSession(this.state);
     this.setState({
       isPaused: false,
       isStarted: false,
@@ -96,18 +95,7 @@ export default class Timer extends React.Component<Props, State> {
   tick = () => {
     let remaining = this.state.secondsRemaining;
     if (remaining <= 0) {
-      if (this.state.timer !== null) clearInterval(this.state.timer);
-      // TODO: Timer ran out
-      //  - Log the pomodoro
-      //  - Stop the clock
-      // Reset the timer
-      this.setState({
-        isPaused: false,
-        isStarted: false,
-        timer: null,
-        secondsElapsed: 0,
-        secondsRemaining: 0
-      });
+      this.clickReset();
     } else if (this.state.isStarted && !this.state.isPaused) {
       this.setState(prevState => ({
         secondsElapsed: prevState.secondsElapsed + 1,
