@@ -3,6 +3,7 @@ import React from "react";
 import "./App.css";
 import Timer from "./Timer";
 import type { AppState, TimerState } from "./types";
+import * as Api from "./api";
 
 type Props = {};
 
@@ -30,5 +31,6 @@ export default class App extends React.Component<Props, AppState> {
 
   completeSession = (timer_state: TimerState) => {
     this.setState({ pomodoros: [...this.state.pomodoros, timer_state] });
+    Api.save(timer_state);
   };
 }

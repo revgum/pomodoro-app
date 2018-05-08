@@ -1,8 +1,12 @@
+// Mock the api calls for testing, see ../__mocks__/api.js
+jest.mock("../api");
+
 import React from "react";
 import App from "../App";
 import Timer from "../Timer";
 import { shallow, mount, render } from "enzyme";
 import renderer from "react-test-renderer";
+import * as Api from "../api";
 
 const mockCompleteSession = jest.fn();
 const timerProps = {
