@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from "react";
 import "./Controls.css";
 
@@ -21,17 +20,17 @@ export default class Controls extends React.Component<Props> {
             onClick={this.props.clickStartStop}
             className={this.startClasses()}
           >
-            {this.props.isStarted ? "Stop" : "Start"}
+            {this.props.isStarted ? "Finish" : "Start"}
           </li>
-          <li
-            onClick={this.props.isStarted ? this.props.clickPause : null}
-            className={this.pauseClasses()}
-          >
-            Pause
-          </li>
+          {!this.props.isPaused &&
+            this.props.isStarted && (
+              <li onClick={this.props.clickPause} className="pause">
+                Pause
+              </li>
+            )}
           {this.props.isStarted && (
-            <li onClick={this.props.clickReset} className={`reset`}>
-              Reset
+            <li onClick={this.props.clickReset} className="reset">
+              Restart
             </li>
           )}
         </ul>
@@ -42,13 +41,6 @@ export default class Controls extends React.Component<Props> {
   startClasses = () => {
     let classes = ["start"];
     classes.push(this.props.isStarted ? "started" : "stopped");
-    return classes.join(" ");
-  };
-
-  pauseClasses = () => {
-    let classes = ["pause"];
-    if (this.props.isPaused) classes.push("paused");
-    classes.push(this.props.isStarted ? "enabled" : "disabled");
     return classes.join(" ");
   };
 }

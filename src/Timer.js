@@ -1,9 +1,10 @@
 // @flow
-
 import * as React from "react";
 import "./Timer.css";
 import Controls from "./Controls";
-import type { TimerState } from "./types";
+import PauseList from "./PauseList";
+import type { PauseState, TimerState } from "./types";
+import * as Utils from "./utils";
 
 type Props = {
   minutes: number,
@@ -17,10 +18,12 @@ export default class Timer extends React.Component<Props, TimerState> {
     seconds: 0
   };
 
-  state = {
+  state: TimerState = {
     isPaused: false,
     isStarted: true,
     minutes: 25,
+    pauses: [],
+    pausedElapsed: 0,
     seconds: 0,
     secondsElapsed: 0,
     secondsRemaining: 25 * 60,
@@ -47,7 +50,7 @@ export default class Timer extends React.Component<Props, TimerState> {
     return (
       <div className="timer">
         <div className="remaining">
-          {this.formattedTime(this.state.secondsRemaining)}
+          {Utils.formattedTime(this.state.secondsRemaining)}
         </div>
         <Controls
           clickPause={this.clickPause}
@@ -56,6 +59,12 @@ export default class Timer extends React.Component<Props, TimerState> {
           isPaused={this.state.isPaused}
           isStarted={this.state.isStarted}
           secondsRemaining={this.state.secondsRemaining}
+        />
+        <PauseList
+          isPaused={this.state.isPaused}
+          pauses={this.state.pauses}
+          pausedElapsed={this.state.pausedElapsed}
+          savePause={this.savePause}
         />
       </div>
     );
@@ -92,6 +101,20 @@ export default class Timer extends React.Component<Props, TimerState> {
     }
   };
 
+  savePause = (description: string) => {
+    let paused: PauseState = {
+      seconds: this.state.pausedElapsed,
+      description: description
+    };
+
+    this.state.pauses &&
+      this.setState({
+        isPaused: false,
+        pausedElapsed: 0,
+        pauses: [paused, ...this.state.pauses]
+      });
+  };
+
   tick = () => {
     let remaining = this.state.secondsRemaining;
     if (remaining <= 0) {
@@ -103,19 +126,9 @@ export default class Timer extends React.Component<Props, TimerState> {
       }));
     } else if (this.state.isPaused) {
       this.setState(prevState => ({
+        pausedElapsed: prevState.pausedElapsed + 1,
         secondsElapsed: prevState.secondsElapsed + 1
       }));
     }
-  };
-
-  formattedTime = (seconds: number) => {
-    let hrs = Math.floor(seconds / 3600);
-    let mins = Math.floor((seconds % 3600) / 60);
-    let secs = seconds % 60;
-    let ret = "";
-    if (hrs > 0) ret += `${hrs}:`;
-    ret += mins < 10 ? `0${mins}:` : `${mins}:`;
-    ret += secs < 10 ? `0${secs}` : secs;
-    return ret;
   };
 }

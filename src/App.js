@@ -1,15 +1,15 @@
 // @flow
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import Timer from "./Timer";
 import type { AppState, TimerState } from "./types";
 
 type Props = {};
 
-export default class App extends Component<Props, AppState> {
+export default class App extends React.Component<Props, AppState> {
   static defaultProps = {};
 
-  state = {
+  state: AppState = {
     pomodoros: [],
     timer: {
       minutes: 25,
