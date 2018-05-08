@@ -15,10 +15,10 @@ exports[`captures a snapshot 1`] = `
         className="start started"
         onClick={[Function]}
       >
-        Stop
+        Finish
       </li>
       <li
-        className="pause enabled"
+        className="pause"
         onClick={[Function]}
       >
         Pause
@@ -27,9 +27,12 @@ exports[`captures a snapshot 1`] = `
         className="reset"
         onClick={[Function]}
       >
-        Reset
+        Restart
       </li>
     </ul>
+  </div>
+  <div>
+    <ul />
   </div>
 </div>
 `;

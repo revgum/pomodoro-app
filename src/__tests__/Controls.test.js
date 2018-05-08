@@ -31,8 +31,6 @@ it("renders three buttons when started", () => {
   expect(wrapper.find("li")).toHaveLength(3);
   expect(wrapper.find("li.start")).toMatchSelector(".started");
   expect(wrapper.find("li.pause")).not.toMatchSelector(".paused");
-  expect(wrapper.find("li.pause")).not.toMatchSelector(".disabled");
-  expect(wrapper.find("li.pause")).toMatchSelector(".enabled");
 });
 
 describe("when stopped", () => {
@@ -48,8 +46,8 @@ describe("when stopped", () => {
   );
   const wrapper = shallow(component);
 
-  it("has two buttons", () => {
-    expect(wrapper.find("li")).toHaveLength(2);
+  it("has the start button", () => {
+    expect(wrapper.find("li")).toHaveLength(1);
   });
 
   it("does not render the reset button", () => {
@@ -75,8 +73,9 @@ describe("when started and paused", () => {
   );
   const wrapper = shallow(component);
 
-  it("has three buttons", () => {
-    expect(wrapper.find("li")).toHaveLength(3);
+  it("has start and reset buttons", () => {
+    expect(wrapper.find("li.start")).toHaveLength(1);
+    expect(wrapper.find("li.reset")).toHaveLength(1);
   });
 
   it("renders the reset button", () => {
@@ -88,10 +87,8 @@ describe("when started and paused", () => {
     expect(wrapper.find("li.start")).toMatchSelector(".started");
   });
 
-  it("renders the pause button as enabled", () => {
-    expect(wrapper.find("li.pause")).not.toMatchSelector(".disabled");
-    expect(wrapper.find("li.pause")).toMatchSelector(".enabled");
-    expect(wrapper.find("li.pause")).toMatchSelector(".paused");
+  it("does not render the pause button", () => {
+    expect(wrapper.find("li.pause")).not.toExist();
   });
 });
 
