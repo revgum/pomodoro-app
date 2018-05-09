@@ -21,3 +21,9 @@ export async function save(timer_state: TimerState) {
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 }
+
+export async function fetchAll() {
+  let response = await fetch(`${api_host}/pomodoros`);
+  if (!response.ok) throw new Error(response.statusText);
+  return await response.json();
+}

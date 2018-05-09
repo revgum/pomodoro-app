@@ -2,14 +2,12 @@
 import * as React from "react";
 import "./PauseList.css";
 import type { PauseState } from "./types";
-import PauseForm from "./PauseForm";
 import PauseListItem from "./PauseListItem";
 
 type Props = {
   isPaused: boolean,
   pauses?: Array<PauseState>,
-  pausedElapsed: number,
-  savePause: Function
+  pausedElapsed: number
 };
 
 export default class PauseList extends React.Component<Props> {
@@ -20,14 +18,11 @@ export default class PauseList extends React.Component<Props> {
   };
 
   render() {
+    if (this.props.pauses.length === 0) return null;
     return (
       <div>
+        <h2>Paused</h2>
         <ul>
-          <PauseForm
-            isPaused={this.props.isPaused}
-            pausedElapsed={this.props.pausedElapsed}
-            savePause={this.props.savePause}
-          />
           {this.props.pauses &&
             this.props.pauses.map((p, i) => (
               <PauseListItem key={`p${i}`} {...p} />

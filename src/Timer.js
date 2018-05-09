@@ -2,6 +2,7 @@
 import * as React from "react";
 import "./Timer.css";
 import Controls from "./Controls";
+import PauseForm from "./PauseForm";
 import PauseList from "./PauseList";
 import type { PauseState, TimerState } from "./types";
 import * as Utils from "./utils";
@@ -60,11 +61,15 @@ export default class Timer extends React.Component<Props, TimerState> {
           isStarted={this.state.isStarted}
           secondsRemaining={this.state.secondsRemaining}
         />
+        <PauseForm
+          isPaused={this.state.isPaused}
+          pausedElapsed={this.state.pausedElapsed}
+          savePause={this.savePause}
+        />
         <PauseList
           isPaused={this.state.isPaused}
           pauses={this.state.pauses}
           pausedElapsed={this.state.pausedElapsed}
-          savePause={this.savePause}
         />
       </div>
     );

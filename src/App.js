@@ -2,8 +2,9 @@
 import React from "react";
 import "./App.css";
 import Timer from "./Timer";
+import PomodoroList from "./PomodoroList";
 import type { AppState, TimerState } from "./types";
-import { save } from "./api";
+import { fetchAll, save } from "./api";
 
 type Props = {};
 
@@ -18,6 +19,12 @@ export default class App extends React.Component<Props, AppState> {
     }
   };
 
+  componentDidMount() {
+    fetchAll()
+      .then(pomodoros => this.setState({ pomodoros }))
+      .catch(error => console.error("ERROR", error));
+  }
+
   render() {
     return (
       <div className="app">
@@ -25,6 +32,7 @@ export default class App extends React.Component<Props, AppState> {
           {...this.state.timer}
           completeSession={this.completeSession.bind(this)}
         />
+        <PomodoroList pomodoros={this.state.pomodoros} />
       </div>
     );
   }
@@ -33,7 +41,7 @@ export default class App extends React.Component<Props, AppState> {
     // TODO: Add some Notification component and related state for success/error to the UI
     save(timer_state)
       .then(pomodoro => {
-        this.setState({ pomodoros: [...this.state.pomodoros, pomodoro] });
+        this.setState({ pomodoros: [pomodoro, ...this.state.pomodoros] });
       })
       .catch(error => console.error("ERROR", error));
   };
