@@ -34,25 +34,22 @@ class Controls extends React.Component<Props> {
     return (
       <div className="timer-controls">
         {this.startStopButton()}
-        {!this.props.isPaused &&
-          this.props.isStarted && (
-            <IconButton
-              onClick={this.props.clickPause}
-              className={this.props.classes.button}
-              aria-label="Pause"
-            >
-              <PauseCircleOutline />
-            </IconButton>
-          )}
-        {this.props.isStarted && (
-          <IconButton
-            onClick={this.props.clickReset}
-            className={this.props.classes.button}
-            aria-label="Restart"
-          >
-            <RepeatOne />
-          </IconButton>
-        )}
+        <IconButton
+          aria-label="Pause"
+          className={this.props.classes.button}
+          disabled={this.props.isPaused || !this.props.isStarted}
+          onClick={this.props.clickPause}
+        >
+          <PauseCircleOutline />
+        </IconButton>
+        <IconButton
+          aria-label="Restart"
+          className={this.props.classes.button}
+          disabled={!this.props.isStarted}
+          onClick={this.props.clickReset}
+        >
+          <RepeatOne />
+        </IconButton>
       </div>
     );
   }
@@ -61,8 +58,8 @@ class Controls extends React.Component<Props> {
     if (this.props.isStarted) {
       return (
         <IconButton
-          className={this.props.classes.button}
           aria-label="Stop"
+          className={this.props.classes.button}
           onClick={this.props.clickStartStop}
         >
           <AlarmOff />
@@ -71,8 +68,8 @@ class Controls extends React.Component<Props> {
     } else {
       return (
         <IconButton
-          className={this.props.classes.button}
           aria-label="Start"
+          className={this.props.classes.button}
           onClick={this.props.clickStartStop}
         >
           <PlayCircleOutline />
