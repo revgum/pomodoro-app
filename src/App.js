@@ -6,9 +6,27 @@ import PomodoroList from "./PomodoroList";
 import type { AppState, TimerState } from "./types";
 import { fetchAll, save } from "./api";
 
-type Props = {};
+// material-ui
+import { withStyles } from "material-ui/styles";
+import Paper from "material-ui/Paper";
+import Grid from "material-ui/Grid";
 
-export default class App extends React.Component<Props, AppState> {
+type Props = {
+  classes: any
+};
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: "center",
+    color: theme.palette.text.secondary
+  }
+});
+
+class App extends React.Component<Props, AppState> {
   static defaultProps = {};
 
   state: AppState = {
@@ -27,12 +45,22 @@ export default class App extends React.Component<Props, AppState> {
 
   render() {
     return (
-      <div className="app">
-        <Timer
-          {...this.state.timer}
-          completeSession={this.completeSession.bind(this)}
-        />
-        <PomodoroList pomodoros={this.state.pomodoros} />
+      <div className={this.props.classes.root}>
+        <Grid container spacing={24}>
+          <Grid item xs={6}>
+            <Paper className={this.props.classes.paper}>
+              <Timer
+                {...this.state.timer}
+                completeSession={this.completeSession.bind(this)}
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={this.props.classes.paper}>
+              <PomodoroList pomodoros={this.state.pomodoros} />
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
     );
   }
@@ -46,3 +74,5 @@ export default class App extends React.Component<Props, AppState> {
       .catch(error => console.error("ERROR", error));
   };
 }
+
+export default withStyles(styles)(App);

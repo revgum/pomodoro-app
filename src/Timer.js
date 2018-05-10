@@ -7,6 +7,9 @@ import PauseList from "./PauseList";
 import type { PauseState, TimerState } from "./types";
 import * as Utils from "./utils";
 
+// material-ui
+import { LinearProgress } from "material-ui/Progress";
+
 type Props = {
   completeSession: Function,
   minutes: number,
@@ -53,6 +56,14 @@ export default class Timer extends React.Component<Props, TimerState> {
         <div className="remaining">
           {Utils.formattedTime(this.state.secondsRemaining)}
         </div>
+        <LinearProgress
+          variant="determinate"
+          value={
+            this.state.secondsRemaining /
+            (this.props.minutes * 60 + this.props.seconds) *
+            100
+          }
+        />
         <Controls
           clickPause={this.clickPause}
           clickReset={this.clickReset}
@@ -66,6 +77,7 @@ export default class Timer extends React.Component<Props, TimerState> {
           pausedElapsed={this.state.pausedElapsed}
           savePause={this.savePause}
         />
+        {this.state.isPaused && <LinearProgress color="secondary" />}
         <PauseList
           isPaused={this.state.isPaused}
           pauses={this.state.pauses}

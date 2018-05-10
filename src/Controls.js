@@ -2,7 +2,16 @@
 import * as React from "react";
 import "./Controls.css";
 
+// material-ui
+import { withStyles } from "material-ui/styles";
+import IconButton from "material-ui/IconButton";
+import PlayCircleOutline from "@material-ui/icons/PlayCircleOutline";
+import AlarmOff from "@material-ui/icons/AlarmOff";
+import PauseCircleOutline from "@material-ui/icons/PauseCircleOutline";
+import RepeatOne from "@material-ui/icons/RepeatOne";
+
 type Props = {
+  classes: any,
   clickPause: Function,
   clickReset: Function,
   clickStartStop: Function,
@@ -11,36 +20,66 @@ type Props = {
   secondsRemaining: number
 };
 
-export default class Controls extends React.Component<Props> {
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit
+  },
+  input: {
+    display: "none"
+  }
+});
+
+class Controls extends React.Component<Props> {
   render() {
     return (
       <div className="timer-controls">
-        <ul>
-          <li
-            onClick={this.props.clickStartStop}
-            className={this.startClasses()}
-          >
-            {this.props.isStarted ? "Finish" : "Start"}
-          </li>
-          {!this.props.isPaused &&
-            this.props.isStarted && (
-              <li onClick={this.props.clickPause} className="pause">
-                Pause
-              </li>
-            )}
-          {this.props.isStarted && (
-            <li onClick={this.props.clickReset} className="reset">
-              Restart
-            </li>
+        {this.startStopButton()}
+        {!this.props.isPaused &&
+          this.props.isStarted && (
+            <IconButton
+              onClick={this.props.clickPause}
+              className={this.props.classes.button}
+              aria-label="Pause"
+            >
+              <PauseCircleOutline />
+            </IconButton>
           )}
-        </ul>
+        {this.props.isStarted && (
+          <IconButton
+            onClick={this.props.clickReset}
+            className={this.props.classes.button}
+            aria-label="Restart"
+          >
+            <RepeatOne />
+          </IconButton>
+        )}
       </div>
     );
   }
 
-  startClasses = () => {
-    let classes = ["start"];
-    classes.push(this.props.isStarted ? "started" : "stopped");
-    return classes.join(" ");
+  startStopButton = () => {
+    if (this.props.isStarted) {
+      return (
+        <IconButton
+          className={this.props.classes.button}
+          aria-label="Stop"
+          onClick={this.props.clickStartStop}
+        >
+          <AlarmOff />
+        </IconButton>
+      );
+    } else {
+      return (
+        <IconButton
+          className={this.props.classes.button}
+          aria-label="Start"
+          onClick={this.props.clickStartStop}
+        >
+          <PlayCircleOutline />
+        </IconButton>
+      );
+    }
   };
 }
+
+export default withStyles(styles)(Controls);
