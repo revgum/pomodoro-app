@@ -4,12 +4,13 @@ import { createShallow, createRender } from "material-ui/test-utils";
 import IconButton from "material-ui/IconButton";
 import renderer from "react-test-renderer";
 
+const mockPause = jest.fn();
+const mockReset = jest.fn();
+const mockStartStop = jest.fn();
+
 describe("<Controls />", () => {
   let shallow;
   let render;
-  const mockPause = jest.fn();
-  const mockReset = jest.fn();
-  const mockStartStop = jest.fn();
   const component = (
     <Controls
       clickPause={mockPause}
@@ -42,68 +43,71 @@ describe("<Controls />", () => {
   });
 
   describe("when stopped", () => {
-    const component = (
-      <Controls
-        clickPause={mockPause}
-        clickReset={mockReset}
-        clickStartStop={mockStartStop}
-        isPaused={false}
-        isStarted={false}
-        secondsRemaining={60}
-      />
-    );
+    let wrapper;
+    beforeAll(() => {
+      wrapper = shallow(
+        <Controls
+          clickPause={mockPause}
+          clickReset={mockReset}
+          clickStartStop={mockStartStop}
+          isPaused={false}
+          isStarted={false}
+          secondsRemaining={60}
+        />
+      ).dive();
+    });
 
     it("has the start button", () => {
-      const wrapper = shallow(component).dive();
       expect(wrapper.find(".start")).toHaveLength(1);
     });
 
     it("does not have the stop button", () => {
-      const wrapper = shallow(component).dive();
       expect(wrapper.find(".stop")).not.toExist();
     });
   });
 
   describe("when started and paused", () => {
-    const component = (
-      <Controls
-        clickPause={mockPause}
-        clickReset={mockReset}
-        clickStartStop={mockStartStop}
-        isPaused={true}
-        isStarted={true}
-        secondsRemaining={60}
-      />
-    );
+    let wrapper;
+    beforeAll(() => {
+      wrapper = shallow(
+        <Controls
+          clickPause={mockPause}
+          clickReset={mockReset}
+          clickStartStop={mockStartStop}
+          isPaused={true}
+          isStarted={true}
+          secondsRemaining={60}
+        />
+      ).dive();
+    });
 
     it("renders the reset and pause button", () => {
-      const wrapper = shallow(component).dive();
       expect(wrapper.find(".reset")).toExist();
       expect(wrapper.find(".pause")).toExist();
     });
 
-    it("renders the start/stop button as started", () => {
-      const wrapper = shallow(component).dive();
+    it("renders the stop button and not the start button", () => {
       expect(wrapper.find(".start")).not.toExist();
       expect(wrapper.find(".stop")).toHaveLength(1);
     });
   });
 
   describe("handling click events", () => {
+    let wrapper;
+    beforeAll(() => {
+      wrapper = shallow(component).dive();
+    });
     it("calls the pause function", () => {
-      const wrapper = shallow(component).dive();
       wrapper.find(".pause").simulate("click");
       expect(mockPause).toHaveBeenCalled();
     });
 
     it("calls the start/stop function", () => {
-      const wrapper = shallow(component).dive();
       wrapper.find(".stop").simulate("click");
       expect(mockStartStop).toHaveBeenCalled();
     });
 
     it("calls the reset function", () => {
-      const wrapper = shallow(component).dive();
       wrapper.find(".reset").simulate("click");
       expect(mockReset).toHaveBeenCalled();
     });
