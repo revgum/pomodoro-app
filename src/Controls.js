@@ -14,7 +14,7 @@ type Props = {
 export default class Controls extends React.Component<Props> {
   render() {
     return (
-      <div>
+      <div className="timer-controls">
         <ul>
           <li
             onClick={this.props.clickStartStop}

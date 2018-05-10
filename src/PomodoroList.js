@@ -2,25 +2,57 @@
 import * as React from "react";
 import "./PomodoroList.css";
 import PomodoroListItem from "./PomodoroListItem";
+import type { TimerState } from "./types";
 
 type Props = {
-  pomodoros: Array<any>
+  pomodoros: Array<TimerState>
 };
 
-export default class PomodoroList extends React.Component<Props> {
+type State = {
+  showAll: boolean
+};
+
+export default class PomodoroList extends React.Component<Props, State> {
   static defaultProps = {
     pomodoros: []
   };
 
+  state = {
+    showAll: false
+  };
+
   render() {
     return (
-      <div>
+      <div className="pomodoro-list">
         <ul>
-          {this.props.pomodoros.map(p => (
-            <PomodoroListItem key={`pomodoro-${p.id}`} {...p} />
+          <li key="toggle" className="list-toggle" onClick={this.clickShowAll}>
+            Display {this.state.showAll ? "Last 3" : "All"}
+          </li>
+          {this.props.pomodoros.map((p, i) => (
+            <PomodoroListItem
+              key={`pomodoro-${i}`}
+              {...p}
+              visible={i <= 2 || this.state.showAll}
+            />
           ))}
+          {this.moreListItem()}
         </ul>
       </div>
     );
   }
+
+  clickShowAll = () => {
+    this.setState({
+      showAll: !this.state.showAll
+    });
+  };
+
+  moreListItem = () => {
+    if (this.props.pomodoros.length <= 3) return null;
+    return (
+      <li key="more" className={`more ${this.state.showAll ? "hidden" : ""}`}>
+        {`... ${this.props.pomodoros.length - 3} more`}
+      </li>
+    );
+  };
 }

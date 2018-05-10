@@ -1,6 +1,8 @@
 // @flow
 
 export type TimerState = {
+  id?: number,
+  visible?: boolean,
   isPaused: boolean,
   isStarted: boolean,
   minutes: number,

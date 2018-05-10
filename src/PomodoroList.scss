@@ -1,1 +1,24 @@
 @import "styles/shared.scss";
+
+.pomodoro-list {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li.hidden {
+      display: none;
+    }
+
+    li.list-toggle:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    li.more {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+  }
+}

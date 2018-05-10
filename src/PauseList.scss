@@ -1,1 +1,9 @@
 @import "styles/shared.scss";
+
+.pause-list {
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -22,7 +22,7 @@ export default class PauseForm extends React.Component<Props, State> {
   render() {
     if (!this.props.isPaused) return null;
     return (
-      <li>
+      <div>
         <span>{Utils.formattedTime(this.props.pausedElapsed)} : </span>
         <input
           autoFocus
@@ -34,7 +34,7 @@ export default class PauseForm extends React.Component<Props, State> {
         <button onClick={this.save} ref={btn => btn && (this.saveButton = btn)}>
           Save
         </button>
-      </li>
+      </div>
     );
   }
 

@@ -10,8 +10,8 @@ type Props = TimerState;
 export default class PomodorListItem extends React.Component<Props> {
   render() {
     return (
-      <li>
-        <h2>{this.headerTitle()}</h2>
+      <li className={this.classes()}>
+        <span>{this.headerTitle()}</span>
         <PauseList
           isPaused={true}
           pauses={this.props.pauses}
@@ -23,5 +23,9 @@ export default class PomodorListItem extends React.Component<Props> {
 
   headerTitle = () => {
     return `${Utils.formattedTime(this.props.secondsRemaining)} remaining`;
+  };
+
+  classes = () => {
+    return this.props.visible ? "" : "hidden";
   };
 }
