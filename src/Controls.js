@@ -36,7 +36,7 @@ class Controls extends React.Component<Props> {
         {this.startStopButton()}
         <IconButton
           aria-label="Pause"
-          className={this.props.classes.button}
+          className={this.props.classes.button + " pause"}
           disabled={this.props.isPaused || !this.props.isStarted}
           onClick={this.props.clickPause}
         >
@@ -44,7 +44,7 @@ class Controls extends React.Component<Props> {
         </IconButton>
         <IconButton
           aria-label="Restart"
-          className={this.props.classes.button}
+          className={this.props.classes.button + " reset"}
           disabled={!this.props.isStarted}
           onClick={this.props.clickReset}
         >
@@ -59,7 +59,7 @@ class Controls extends React.Component<Props> {
       return (
         <IconButton
           aria-label="Stop"
-          className={this.props.classes.button}
+          className={this.props.classes.button + " stop"}
           onClick={this.props.clickStartStop}
         >
           <AlarmOff />
@@ -69,7 +69,7 @@ class Controls extends React.Component<Props> {
       return (
         <IconButton
           aria-label="Start"
-          className={this.props.classes.button}
+          className={this.props.classes.button + " start"}
           onClick={this.props.clickStartStop}
         >
           <PlayCircleOutline />

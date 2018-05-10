@@ -1,5 +1,4 @@
 import React from "react";
-import { createShallow, getClasses } from "material-ui/test-utils";
 import Timer from "../Timer";
 import Controls from "../Controls";
 import { shallow } from "enzyme";
@@ -11,11 +10,6 @@ const timerProps = {
   seconds: 0,
   completeSession: mockCompleteSession
 };
-
-let shallow;
-beforeAll(() => {
-  shallow = createShallow({ dive: true });
-});
 
 // Shallow rendering test
 it("passes a smoke test", () => {

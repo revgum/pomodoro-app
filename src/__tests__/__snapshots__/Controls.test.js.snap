@@ -1,26 +1,125 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`captures a snapshot 1`] = `
-<div>
-  <ul>
-    <li
-      className="start started"
-      onClick={[Function]}
+exports[`<Controls /> captures a snapshot 1`] = `
+<div
+  className="timer-controls"
+>
+  <button
+    aria-label="Stop"
+    className="MuiButtonBase-root-9 MuiIconButton-root-3 Controls-button-1 stop"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex="0"
+    type="button"
+  >
+    <span
+      className="MuiIconButton-label-8"
     >
-      Finish
-    </li>
-    <li
-      className="pause"
-      onClick={[Function]}
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-12"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M12 6c3.87 0 7 3.13 7 7 0 .84-.16 1.65-.43 2.4l1.52 1.52c.58-1.19.91-2.51.91-3.92 0-4.97-4.03-9-9-9-1.41 0-2.73.33-3.92.91L9.6 6.43C10.35 6.16 11.16 6 12 6zm10-.28l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM2.92 2.29L1.65 3.57 2.98 4.9l-1.11.93 1.42 1.42 1.11-.94.8.8C3.83 8.69 3 10.75 3 13c0 4.97 4.02 9 9 9 2.25 0 4.31-.83 5.89-2.2l2.2 2.2 1.27-1.27L3.89 3.27l-.97-.98zm13.55 16.1C15.26 19.39 13.7 20 12 20c-3.87 0-7-3.13-7-7 0-1.7.61-3.26 1.61-4.47l9.86 9.86zM8.02 3.28L6.6 1.86l-.86.71 1.42 1.42.86-.71z"
+          />
+        </g>
+      </svg>
+    </span>
+    <span
+      className="MuiTouchRipple-root-18"
+    />
+  </button>
+  <button
+    aria-label="Pause"
+    className="MuiButtonBase-root-9 MuiIconButton-root-3 Controls-button-1 pause"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex="0"
+    type="button"
+  >
+    <span
+      className="MuiIconButton-label-8"
     >
-      Pause
-    </li>
-    <li
-      className="reset"
-      onClick={[Function]}
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-12"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M9 16h2V8H9v8zm3-14C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-4h2V8h-2v8z"
+          />
+        </g>
+      </svg>
+    </span>
+    <span
+      className="MuiTouchRipple-root-18"
+    />
+  </button>
+  <button
+    aria-label="Restart"
+    className="MuiButtonBase-root-9 MuiIconButton-root-3 Controls-button-1 reset"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex="0"
+    type="button"
+  >
+    <span
+      className="MuiIconButton-label-8"
     >
-      Restart
-    </li>
-  </ul>
+      <svg
+        aria-hidden="true"
+        className="MuiSvgIcon-root-12"
+        color={undefined}
+        focusable="false"
+        viewBox="0 0 24 24"
+      >
+        <g>
+          <path
+            d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4zm-4-2V9h-1l-2 1v1h1.5v4H13z"
+          />
+        </g>
+      </svg>
+    </span>
+    <span
+      className="MuiTouchRipple-root-18"
+    />
+  </button>
 </div>
 `;

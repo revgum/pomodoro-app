@@ -1,41 +1,184 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`captures a snapshot 1`] = `
+exports[`<App /> captures a snapshot 1`] = `
 <div
-  className="app"
+  className="App-root-1"
 >
   <div
-    className="timer"
+    className="MuiGrid-container-3 MuiGrid-spacing-xs-24-26"
   >
     <div
-      className="remaining"
+      className="MuiGrid-item-4 MuiGrid-grid-xs-6-34"
     >
-      25:00
+      <div
+        className="MuiPaper-root-93 MuiPaper-elevation2-97 MuiPaper-rounded-94 App-paper-2"
+      >
+        <div
+          className="timer"
+        >
+          <div
+            className="remaining"
+          >
+            25:00
+          </div>
+          <div
+            aria-valuenow={100}
+            className="MuiLinearProgress-root-120 MuiLinearProgress-colorPrimary-121"
+            role="progressbar"
+          >
+            <div
+              className="MuiLinearProgress-bar-128 MuiLinearProgress-barColorPrimary-129 MuiLinearProgress-bar1Determinate-133"
+              style={
+                Object {
+                  "transform": "scaleX(1)",
+                }
+              }
+            />
+          </div>
+          <div
+            className="timer-controls"
+          >
+            <button
+              aria-label="Stop"
+              className="MuiButtonBase-root-144 MuiIconButton-root-138 Controls-button-136 stop"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex="0"
+              type="button"
+            >
+              <span
+                className="MuiIconButton-label-143"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root-147"
+                  color={undefined}
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <g>
+                    <path
+                      d="M12 6c3.87 0 7 3.13 7 7 0 .84-.16 1.65-.43 2.4l1.52 1.52c.58-1.19.91-2.51.91-3.92 0-4.97-4.03-9-9-9-1.41 0-2.73.33-3.92.91L9.6 6.43C10.35 6.16 11.16 6 12 6zm10-.28l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM2.92 2.29L1.65 3.57 2.98 4.9l-1.11.93 1.42 1.42 1.11-.94.8.8C3.83 8.69 3 10.75 3 13c0 4.97 4.02 9 9 9 2.25 0 4.31-.83 5.89-2.2l2.2 2.2 1.27-1.27L3.89 3.27l-.97-.98zm13.55 16.1C15.26 19.39 13.7 20 12 20c-3.87 0-7-3.13-7-7 0-1.7.61-3.26 1.61-4.47l9.86 9.86zM8.02 3.28L6.6 1.86l-.86.71 1.42 1.42.86-.71z"
+                    />
+                  </g>
+                </svg>
+              </span>
+              <span
+                className="MuiTouchRipple-root-153"
+              />
+            </button>
+            <button
+              aria-label="Pause"
+              className="MuiButtonBase-root-144 MuiIconButton-root-138 Controls-button-136 pause"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex="0"
+              type="button"
+            >
+              <span
+                className="MuiIconButton-label-143"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root-147"
+                  color={undefined}
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <g>
+                    <path
+                      d="M9 16h2V8H9v8zm3-14C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-4h2V8h-2v8z"
+                    />
+                  </g>
+                </svg>
+              </span>
+              <span
+                className="MuiTouchRipple-root-153"
+              />
+            </button>
+            <button
+              aria-label="Restart"
+              className="MuiButtonBase-root-144 MuiIconButton-root-138 Controls-button-136 reset"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex="0"
+              type="button"
+            >
+              <span
+                className="MuiIconButton-label-143"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root-147"
+                  color={undefined}
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <g>
+                    <path
+                      d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4zm-4-2V9h-1l-2 1v1h1.5v4H13z"
+                    />
+                  </g>
+                </svg>
+              </span>
+              <span
+                className="MuiTouchRipple-root-153"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <ul>
-        <li
-          className="start started"
-          onClick={[Function]}
+    <div
+      className="MuiGrid-item-4 MuiGrid-grid-xs-6-34"
+    >
+      <div
+        className="MuiPaper-root-93 MuiPaper-elevation2-97 MuiPaper-rounded-94 App-paper-2"
+      >
+        <div
+          className="pomodoro-list"
         >
-          Finish
-        </li>
-        <li
-          className="pause"
-          onClick={[Function]}
-        >
-          Pause
-        </li>
-        <li
-          className="reset"
-          onClick={[Function]}
-        >
-          Restart
-        </li>
-      </ul>
-    </div>
-    <div>
-      <ul />
+          <ul>
+            <li
+              className="list-toggle"
+              onClick={[Function]}
+            >
+              Display 
+              All
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>
