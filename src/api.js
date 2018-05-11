@@ -27,3 +27,15 @@ export async function fetchAll() {
   if (!response.ok) throw new Error(response.statusText);
   return await response.json();
 }
+
+export async function destroy(timer_state: TimerState) {
+  let response = await fetch(`${api_host}/pomodoros/${timer_state.id}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
+  });
+  if (!response.ok) throw new Error(response.statusText);
+  return await response.json();
+}

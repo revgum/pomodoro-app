@@ -3,6 +3,7 @@
 export type TimerState = {
   id?: number,
   visible?: boolean,
+  classes?: any,
   isPaused: boolean,
   isStarted: boolean,
   minutes: number,

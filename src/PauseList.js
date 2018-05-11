@@ -21,7 +21,7 @@ export default class PauseList extends React.Component<Props> {
     if (this.props.pauses.length === 0) return null;
     return (
       <div className="pause-list">
-        <span>Paused</span>
+        <span>Pauses</span>
         <ul>
           {this.props.pauses &&
             this.props.pauses.map((p, i) => (

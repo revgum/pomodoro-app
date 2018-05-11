@@ -8,7 +8,7 @@ exports[`<App /> captures a snapshot 1`] = `
     className="MuiGrid-container-3 MuiGrid-spacing-xs-24-26"
   >
     <div
-      className="MuiGrid-item-4 MuiGrid-grid-xs-6-34"
+      className="MuiGrid-item-4 MuiGrid-grid-sm-12-53 MuiGrid-grid-md-8-62"
     >
       <div
         className="MuiPaper-root-93 MuiPaper-elevation2-97 MuiPaper-rounded-94 App-paper-2"
@@ -160,24 +160,35 @@ exports[`<App /> captures a snapshot 1`] = `
       </div>
     </div>
     <div
-      className="MuiGrid-item-4 MuiGrid-grid-xs-6-34"
+      className="MuiGrid-item-4 MuiGrid-grid-sm-12-53 MuiGrid-grid-md-4-58"
     >
       <div
-        className="MuiPaper-root-93 MuiPaper-elevation2-97 MuiPaper-rounded-94 App-paper-2"
+        className="PomodoroList-listContainer-162 pomodoro-list"
       >
-        <div
-          className="pomodoro-list"
+        <ul
+          className="PomodoroList-list-163"
         >
-          <ul>
-            <li
-              className="list-toggle"
-              onClick={[Function]}
+          <li
+            onClick={[Function]}
+          >
+            <div
+              className="MuiGrid-container-3 MuiGrid-align-items-xs-flex-end-13 PomodoroList-root-160"
             >
-              Display 
-              All
-            </li>
-          </ul>
-        </div>
+              <div
+                className="MuiGrid-item-4"
+              >
+                <h2
+                  className="PomodoroList-listHeader-164"
+                >
+                  Pomodoros
+                </h2>
+              </div>
+              <div
+                className="MuiGrid-item-4"
+              />
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

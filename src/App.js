@@ -4,7 +4,7 @@ import "./App.css";
 import Timer from "./Timer";
 import PomodoroList from "./PomodoroList";
 import type { AppState, TimerState } from "./types";
-import { fetchAll, save } from "./api";
+import { destroy, fetchAll, save } from "./api";
 
 // material-ui
 import { withStyles } from "material-ui/styles";
@@ -47,7 +47,7 @@ class App extends React.Component<Props, AppState> {
     return (
       <div className={this.props.classes.root}>
         <Grid container spacing={24}>
-          <Grid item xs={6}>
+          <Grid item sm={12} md={8}>
             <Paper className={this.props.classes.paper}>
               <Timer
                 {...this.state.timer}
@@ -55,10 +55,11 @@ class App extends React.Component<Props, AppState> {
               />
             </Paper>
           </Grid>
-          <Grid item xs={6}>
-            <Paper className={this.props.classes.paper}>
-              <PomodoroList pomodoros={this.state.pomodoros} />
-            </Paper>
+          <Grid item sm={12} md={4}>
+            <PomodoroList
+              deletePomodoro={this.deletePomodoro.bind(this)}
+              pomodoros={this.state.pomodoros}
+            />
           </Grid>
         </Grid>
       </div>
@@ -70,6 +71,16 @@ class App extends React.Component<Props, AppState> {
     save(timer_state)
       .then(pomodoro => {
         this.setState({ pomodoros: [pomodoro, ...this.state.pomodoros] });
+      })
+      .catch(error => console.error("ERROR", error));
+  };
+
+  deletePomodoro = (timer_state: TimerState) => {
+    destroy(timer_state)
+      .then(pomodoro => {
+        fetchAll()
+          .then(pomodoros => this.setState({ pomodoros }))
+          .catch(error => console.error("ERROR", error));
       })
       .catch(error => console.error("ERROR", error));
   };
