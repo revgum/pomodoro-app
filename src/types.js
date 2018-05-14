@@ -1,7 +1,7 @@
 // @flow
 
 export type TimerState = {
-  id?: number,
+  id: number,
   visible?: boolean,
   classes?: any,
   isPaused: boolean,

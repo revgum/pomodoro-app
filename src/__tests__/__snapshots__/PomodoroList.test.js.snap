@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PomodoroList /> captures a snapshot 1`] = `
+<div
+  className="PomodoroList-listContainer-3 pomodoro-list"
+>
+  <ul
+    className="PomodoroList-list-4"
+  >
+    <li
+      onClick={[Function]}
+    >
+      <div
+        className="MuiGrid-container-6 MuiGrid-align-items-xs-flex-end-16 PomodoroList-root-1"
+      >
+        <div
+          className="MuiGrid-item-7"
+        >
+          <h2
+            className="PomodoroList-listHeader-5"
+          >
+            Pomodoros
+          </h2>
+        </div>
+        <div
+          className="MuiGrid-item-7"
+        />
+      </div>
+    </li>
+  </ul>
+</div>
+`;

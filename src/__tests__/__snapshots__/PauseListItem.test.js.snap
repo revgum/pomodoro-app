@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PauseListItem /> captures a snapshot 1`] = `
+<li>
+  <span>
+    NaN:NaN
+     : 
+  </span>
+  <span />
+</li>
+`;

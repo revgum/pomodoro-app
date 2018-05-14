@@ -69,6 +69,7 @@ class PomodoroListItem extends React.Component<Props> {
   }
 
   headerTitle = () => {
+    if (this.props.secondsRemaining <= 0) return "Complete";
     return `${Utils.formattedTime(this.props.secondsRemaining)} remaining`;
   };
 

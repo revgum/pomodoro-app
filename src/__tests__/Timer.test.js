@@ -4,11 +4,11 @@ import Controls from "../Controls";
 import { shallow } from "enzyme";
 import renderer from "react-test-renderer";
 
-const mockCompleteSession = jest.fn();
+const mockCompletePomodoro = jest.fn();
 const timerProps = {
   minutes: 25,
   seconds: 0,
-  completeSession: mockCompleteSession
+  completePomodoro: mockCompletePomodoro
 };
 
 // Shallow rendering test
@@ -70,7 +70,7 @@ describe("#tick", () => {
     const instance = wrapper.instance();
     const tickSpy = jest.spyOn(instance, "tick");
     const resetSpy = jest.spyOn(instance, "clickReset");
-    const completeSessionSpy = jest.spyOn(instance.props, "completeSession");
+    const completePomodoroSpy = jest.spyOn(instance.props, "completePomodoro");
 
     // Tick the timer for the final second
     instance.tick();
@@ -86,7 +86,7 @@ describe("#tick", () => {
     instance.tick();
     expect(tickSpy).toHaveBeenCalled();
     expect(resetSpy).toHaveBeenCalled();
-    expect(completeSessionSpy).toHaveBeenCalled();
+    expect(completePomodoroSpy).toHaveBeenCalled();
     expect(wrapper).toHaveState({
       isPaused: false,
       isStarted: false,
@@ -125,7 +125,7 @@ describe("#clickReset", () => {
   const instance = wrapper.instance();
   const tickSpy = jest.spyOn(instance, "tick");
   const resetSpy = jest.spyOn(instance, "clickReset");
-  const completeSessionSpy = jest.spyOn(instance.props, "completeSession");
+  const completePomodoroSpy = jest.spyOn(instance.props, "completePomodoro");
 
   it("resets the timer", () => {
     expect(wrapper).toHaveState({
@@ -137,7 +137,7 @@ describe("#clickReset", () => {
 
     instance.clickReset();
     expect(resetSpy).toHaveBeenCalled();
-    expect(completeSessionSpy).toHaveBeenCalled();
+    expect(completePomodoroSpy).toHaveBeenCalled();
     instance.tick();
     expect(wrapper).toHaveState({
       isPaused: false,
@@ -156,7 +156,7 @@ describe("#clickStartStop", () => {
   const tickSpy = jest.spyOn(instance, "tick");
   const startStopSpy = jest.spyOn(instance, "clickStartStop");
   const resetSpy = jest.spyOn(instance, "clickReset");
-  const completeSessionSpy = jest.spyOn(instance.props, "completeSession");
+  const completePomodoroSpy = jest.spyOn(instance.props, "completePomodoro");
 
   it("stops and resets a timer that is running", () => {
     expect(wrapper).toHaveState({
@@ -169,7 +169,7 @@ describe("#clickStartStop", () => {
     instance.clickStartStop();
     expect(startStopSpy).toHaveBeenCalled();
     expect(resetSpy).toHaveBeenCalled();
-    expect(completeSessionSpy).toHaveBeenCalled();
+    expect(completePomodoroSpy).toHaveBeenCalled();
     expect(wrapper).toHaveState({
       isPaused: false,
       isStarted: false,
@@ -196,6 +196,40 @@ describe("#clickStartStop", () => {
       isStarted: true,
       secondsElapsed: 0,
       secondsRemaining: 1
+    });
+  });
+
+  describe("#savePause", () => {
+    const props = Object.assign({}, timerProps, {
+      minutes: 0,
+      seconds: 2
+    });
+    const wrapper = shallow(<Timer {...props} />);
+    const instance = wrapper.instance();
+    const savePauseSpy = jest.spyOn(instance, "savePause");
+    const pauseSpy = jest.spyOn(instance, "clickPause");
+
+    it("saves a pause", () => {
+      instance.clickPause();
+      expect(pauseSpy).toHaveBeenCalled();
+
+      expect(wrapper).toHaveState({
+        isPaused: true,
+        isStarted: true,
+        secondsElapsed: 0,
+        secondsRemaining: 2
+      });
+
+      instance.tick();
+
+      instance.savePause("test");
+      expect(savePauseSpy).toHaveBeenCalled();
+      expect(wrapper).toHaveState({
+        isPaused: false,
+        isStarted: true,
+        secondsRemaining: 2,
+        pauses: [{ seconds: 1, description: "test" }]
+      });
     });
   });
 });

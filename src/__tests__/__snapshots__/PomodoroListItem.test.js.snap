@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PomodoroListItem /> captures a snapshot 1`] = `
+<li
+  className="hidden"
+>
+  <div
+    className="MuiPaper-root-6 MuiPaper-elevation2-10 MuiPaper-rounded-7 MuiCard-root-5 PomodoroListItem-card-1"
+  >
+    <div
+      className="MuiCardHeader-root-33"
+    >
+      <div
+        className="MuiCardHeader-content-36"
+      >
+        <span
+          className="MuiTypography-root-39 MuiTypography-headline-44 MuiCardHeader-title-37"
+        >
+          NaN:NaN remaining
+        </span>
+      </div>
+      <div
+        className="MuiCardHeader-action-35"
+      >
+        <button
+          className="MuiButtonBase-root-69 MuiIconButton-root-63"
+          disabled={false}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          <span
+            className="MuiIconButton-label-68"
+          >
+            <svg
+              aria-hidden="true"
+              className="MuiSvgIcon-root-72 PomodoroListItem-deleteAction-3"
+              color={undefined}
+              focusable="false"
+              onClick={[Function]}
+              viewBox="0 0 24 24"
+            >
+              <g>
+                <path
+                  d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                />
+              </g>
+            </svg>
+          </span>
+          <span
+            className="MuiTouchRipple-root-78"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      className="MuiCardContent-root-85 PomodoroListItem-cardContent-2"
+    />
+  </div>
+</li>
+`;

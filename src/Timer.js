@@ -11,7 +11,7 @@ import * as Utils from "./utils";
 import { LinearProgress } from "material-ui/Progress";
 
 type Props = {
-  completeSession: Function,
+  completePomodoro: Function,
   minutes: number,
   seconds: number
 };
@@ -23,6 +23,7 @@ export default class Timer extends React.Component<Props, TimerState> {
   };
 
   state: TimerState = {
+    id: 0,
     isPaused: false,
     isStarted: true,
     minutes: 25,
@@ -112,7 +113,7 @@ export default class Timer extends React.Component<Props, TimerState> {
    */
   clickStartStop = () => {
     if (this.state.isStarted) {
-      this.props.completeSession(this.state);
+      this.props.completePomodoro(this.state);
       this.clickReset();
     } else {
       let timer_id = setInterval(this.tick, 1000);

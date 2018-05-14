@@ -51,7 +51,7 @@ class App extends React.Component<Props, AppState> {
             <Paper className={this.props.classes.paper}>
               <Timer
                 {...this.state.timer}
-                completeSession={this.completeSession.bind(this)}
+                completePomodoro={this.completePomodoro.bind(this)}
               />
             </Paper>
           </Grid>
@@ -66,7 +66,7 @@ class App extends React.Component<Props, AppState> {
     );
   }
 
-  completeSession = (timer_state: TimerState) => {
+  completePomodoro = (timer_state: TimerState) => {
     // TODO: Add some Notification component and related state for success/error to the UI
     save(timer_state)
       .then(pomodoro => {
